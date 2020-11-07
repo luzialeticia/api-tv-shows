@@ -20,7 +20,7 @@ const getShowById = (req, res) => {
       if(show) {
         return res.status(200).send(show)
       } else {
-        return.status(404).send('Show not found.')
+        return status(404).send('Show not found.')
       }
     }
   })
