@@ -15,19 +15,15 @@ const getShowById = (req, res) => {
   const id = req.params.id
   model.showsCollection.findById(id, (error, show) => {
     if(error) {
-      return res.sendStatus(500)
-    } else {
-      if(show) {
-        return res.status(200).send(show)
-      } else {
-        return res.status(404).send('Show not found.')
-      }
+      return res.status(404).send('Show not found.')
+    }
+    if(show) {
+      return res.status(200).send(show)
     }
   })
 }
 
 const addShow = (req, res) => {
-  console.log(req.url)
   const showBody = req.body
   const show = new model.showsCollection(showBody)
 
@@ -51,11 +47,10 @@ const updateShow = (req, res) => {
     updatedShow,
     (error, show) => {
       if(error) {
-        return res.status(500).send(error)
-      } else if(show) {
-        return res.status(200).send(updatedShow)
-      } else {
-        return res.sendStatus(400)
+        return res.status(404).send('Show not found.')
+      }
+      if(show) {
+        return res.status(200).send(show)
       }
     }
   )
@@ -65,11 +60,10 @@ const deleteShow = (req, res) => {
   const id = req.params.id
   model.showsCollection.findByIdAndDelete(id, (error, show) => {
     if(error) {
-      return res.status(500).send(error)
-    } else if (show) {
+      return res.status(404).send('Show not found.')
+    }
+    if(show) {
       return res.status(200).send('Show deleted.')
-    } else {
-      return res.sendStatus(404)
     }
   })
 }
