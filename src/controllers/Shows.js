@@ -15,12 +15,12 @@ const getShowById = (req, res) => {
   const id = req.params.id
   model.showsCollection.findById(id, (error, show) => {
     if(error) {
-      return res.status(500).send(error)
+      return res.status(500).send('Show not found.')
     } else {
       if(show) {
         return res.status(200).send(show)
       } else {
-        return status(404).send('Show not found.')
+        return res.sendStatus(404)
       }
     }
   })
