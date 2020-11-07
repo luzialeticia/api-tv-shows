@@ -11,24 +11,28 @@ const showSchema = new Schema({
     type: String,
     required: true
   },
-  genres:{
-    type: Array,
-    required: true,
-  },
-  status:{
+  genres:[{
     type: String,
+    required: true,
+  }],
+  ended:{
+    type: Boolean,
     required: true
   },
   network:{
     type: String,
     required: true
   },
-  cast:{
-    type: Array,
-    required: false
-  },
+  cast:[{
+    type: String,
+    required: true
+  }],
   summary:{
     type: String,
     required: false
   }
 })
+
+const showsCollection = mongoose.model('shows', showSchema)
+
+module.exports = {showsCollection}
