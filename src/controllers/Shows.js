@@ -61,6 +61,19 @@ const updateShow = (req, res) => {
   )
 }
 
+const deleteShow = (req, res) => {
+  const id = req.params.id
+  model.showsCollection.findByIdAndDelete(id, (error, show) => {
+    if(error) {
+      return res.status(500).send(error)
+    } else if (show) {
+      return res.status(200).send('Show deleted.')
+    } else {
+      return res.sendStatus(404)
+    }
+  })
+}
+
 module.exports = {
   getShows,
   getShowById,
